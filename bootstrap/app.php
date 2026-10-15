@@ -11,7 +11,11 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        //
+        // Yeh code 419 Page Expired ka error hamesha ke liye khatam kar dega
+        $middleware->validateCsrfTokens(except: [
+            'tasks',
+            'tasks/*'
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //
