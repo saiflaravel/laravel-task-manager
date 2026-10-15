@@ -1,12 +1,16 @@
+
 <?php
 
-use App\Http\Controllers\TaskController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TaskController;
 
-Route::redirect('/', '/tasks');
+Route::get('/', function () {
+    return redirect()->route('tasks.index');
+});
 
-// Naya simple update route status badalne ke liye
-Route::post('/tasks/{task}/toggle', [TaskController::class, 'update'])->name('tasks.toggle');
+Route::resource('tasks', TaskController::class);
 
-
-Route::resource('tasks', TaskController::class)->except(['create', 'show', 'edit', 'update']);
+Route::patch('/tasks/{task}/toggle-status', [
+    TaskController::class,
+    'toggleStatus'
+])->name('tasks.toggleStatus');

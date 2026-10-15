@@ -1,3 +1,4 @@
+
 <?php
 
 use Illuminate\Database\Migrations\Migration;
@@ -12,7 +13,8 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->text('description')->nullable();
-            $table->enum('status', ['Pending', 'Completed'])->default('Pending');
+            $table->enum('status', ['Pending', 'Completed'])
+                  ->default('Pending');
             $table->timestamps();
         });
     }
@@ -22,4 +24,3 @@ return new class extends Migration
         Schema::dropIfExists('tasks');
     }
 };
-
